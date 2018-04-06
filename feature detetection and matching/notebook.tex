@@ -1,0 +1,742 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{cse-252b-computer-vision-ii-winter-2018-assignment-1}{%
+\section{CSE 252B: Computer Vision II, Winter 2018 -- Assignment
+1}\label{cse-252b-computer-vision-ii-winter-2018-assignment-1}}
+
+\hypertarget{instructor-ben-ochoa}{%
+\subsubsection{Instructor: Ben Ochoa}\label{instructor-ben-ochoa}}
+
+\hypertarget{due-wednesday-january-17-2018-1159-pm}{%
+\subsubsection{Due: Wednesday, January 17, 2018, 11:59
+PM}\label{due-wednesday-january-17-2018-1159-pm}}
+
+\hypertarget{student-zhipeng-yao-pida53257604}{%
+\subsubsection{Student: Zhipeng Yao
+PID:A53257604}\label{student-zhipeng-yao-pida53257604}}
+
+    \hypertarget{instructions}{%
+\subsection{Instructions}\label{instructions}}
+
+\begin{itemize}
+\tightlist
+\item
+  Review the academic integrity and collaboration policies on the course
+  website.
+\item
+  This assignment must be completed individually.
+\item
+  This assignment contains both math and programming problems.
+\item
+  All solutions must be written in this notebook
+\item
+  Math problems must be done in Markdown/LATEX. Remember to show work
+  and describe your solution.
+\item
+  Programming aspects of this assignment must be completed using Python
+  in this notebook.
+\item
+  This notebook contains skeleton code, which should not be modified
+  (This is important for standardization to facilate effeciant grading).
+\item
+  You may use python packages for basic linear algebra, but you may not
+  use packages that directly solve the problem. Ask the instructor if in
+  doubt.
+\item
+  You must submit this notebook exported as a pdf. You must also submit
+  this notebook as an .ipynb file.
+\item
+  You must submit both files (.pdf and .ipynb) on Gradescope. You must
+  mark each problem on Gradescope in the pdf.
+\item
+  It is highly recommended that you begin working on this assignment
+  early.
+\end{itemize}
+
+    \hypertarget{problem-1-math-line-plane-intersection-5-points}{%
+\subsection{Problem 1 (Math): Line-plane intersection (5
+points)}\label{problem-1-math-line-plane-intersection-5-points}}
+
+The line in 3D defined by the join of the points
+\(\boldsymbol{X}_1 = (X_1,  Y_1, Z_1, T_1)^\top\) and
+\(\boldsymbol{X}_2 = (X_2, Y_2, Z_2, T_2)^\top\) can be represented as a
+Plucker matrix
+\(\boldsymbol{L} = \boldsymbol{X}_1  \boldsymbol{X}_2^\top - \boldsymbol{X}_2 \boldsymbol{X}_1^\top\)
+or pencil of points
+\(\boldsymbol{X}(\lambda) = \lambda \boldsymbol{X}_1 + (1 - \lambda) \boldsymbol{X}_2\)
+(i.e., \(\boldsymbol{X}\) is a function of \(\lambda\)). The line
+intersects the plane \(\boldsymbol{\pi} = (a, b, c, d)^\top\) at the
+point
+\(\boldsymbol{X}_{\boldsymbol{L}} = \boldsymbol{L} \boldsymbol{\pi}\) or
+\(\boldsymbol{X}(\lambda_{\boldsymbol{\pi}})\), where
+\(\lambda_{\boldsymbol{\pi}}\) is determined such that
+\(\boldsymbol{X}(\lambda_{\boldsymbol{\pi}})^\top \boldsymbol{\pi} =  0\)
+(i.e., \(\boldsymbol{X}(\lambda_{\boldsymbol{\pi}})\) is the point on
+\(\boldsymbol{\pi}\)). Show that \(\boldsymbol{X}_{\boldsymbol{L}}\) is
+equal to \(\boldsymbol{X}(\lambda_{\boldsymbol{\pi}})\) up to scale.
+
+    Solution: \[X_{L}=L\pi=X_{1}X_{2}^{T}\pi-X_{2}X_{1}^{T}\pi\]
+\[X(\lambda_{\pi})^{T}\pi=0, \ \ \text{so that}\ \  [\lambda_\pi X_{1}^{T}+(1-\lambda_\pi)X_{2}^{T}]\pi=0, \ \ X_{1}^{T}\pi=\frac{\lambda_{\pi}-1}{\lambda_{\pi}}X_{2}^{T}\pi\]
+plug into \(X_L\) expression
+\[X_{L}=X_{1}X_{2}^{T}\pi-X_{2}\frac{\lambda_{\pi}-1}{\lambda_{\pi}}X_{2}^{T}\pi=\frac{X_2^{T}\pi}{\lambda_{\pi}}[\lambda_{\pi} X_{1}+(1-\lambda_{\pi})X_{2}]=CX(\lambda_{\pi})\]
+Q.E.D.
+
+    \hypertarget{problem-2-math-line-quadric-intersection-5-points}{%
+\subsection{Problem 2 (Math): Line-quadric intersection (5
+points)}\label{problem-2-math-line-quadric-intersection-5-points}}
+
+In general, a line in 3D intersects a quadric \(\boldsymbol{Q}\) at
+zero, one (if the line is tangent to the quadric), or two points. If the
+pencil of points
+\(\boldsymbol{X}(\lambda) = \lambda \boldsymbol{X}_1 + (1 -  \lambda) \boldsymbol{X}_2\)
+represents a line in 3D, the (up to two) real roots of the quadratic
+polynomial
+\(c_2 \lambda_{\boldsymbol{Q}}^2 + c_1  \lambda_{\boldsymbol{Q}} + c_0 = 0\)
+are used to solve for the intersection point(s)
+\(\boldsymbol{X}(\lambda_{\boldsymbol{Q}})\). Show that
+\(c_2 =  \boldsymbol{X}_1^\top \boldsymbol{Q} \boldsymbol{X}_1 - 2 \boldsymbol{X}_1^\top \boldsymbol{Q}  \boldsymbol{X}_2 + \boldsymbol{X}_2^\top \boldsymbol{Q} \boldsymbol{X}_2\),
+\(c_1 = 2 (  \boldsymbol{X}_1^\top \boldsymbol{Q} \boldsymbol{X}_2 - \boldsymbol{X}_2^\top \boldsymbol{Q}  \boldsymbol{X}_2 )\),
+and \(c_0 = \boldsymbol{X}_2^\top \boldsymbol{Q} \boldsymbol{X}_2\).
+
+    Solution: a line intersects a quadric Q, so that the intersection points
+satisfy \(X^{T}QX=0\), plug in \(X(\lambda_Q)\) we have
+\[[\lambda_Q X_1+(1-\lambda_Q)X_2]^T Q[\lambda_Q X_1+(1-\lambda_Q)X_2]=0\]
+expand all
+\[(X_1^T QX_1-X_2^T QX_1-X_1^T QX_2+X_2^T QX_2)\lambda_Q^2+(X_1^TQX_2+X_2^TQX_1-2X_2^TQX_2)\lambda_Q+X_2^TQX_2=0\]
+Q is symmetric matrix, so that \(X_2^T QX_1=X_1^T QX_2\)\\
+\[(X_1^T QX_1-2X_1^T QX_2+X_2^T QX_2)\lambda_Q^2+2(X_1^TQX_2-X_2^TQX_2)\lambda_Q+X_2^TQX_2=0\]
+compare the factor, we have
+\[c_2=(X_1^T QX_1-2X_1^T QX_2+X_2^T QX_2),\  c_1=2(X_1^TQX_2-X_2^TQX_2),\  c_0=X_2^TQX_2\]
+Q.E.D.
+
+    \hypertarget{problem-3-programing-feature-detection-20-points}{%
+\subsection{Problem 3 (Programing): Feature detection (20
+points)}\label{problem-3-programing-feature-detection-20-points}}
+
+Download input data from the course website. The file
+price\_center20.JPG contains image 1 and the file price\_center21.JPG
+contains image 2.
+
+For each input image, calculate an image where each pixel value is the
+minor eigenvalue of the gradient matrix
+
+\(N=\left[ \begin{array}{cc} \sum\limits_w I_x^2 & \sum\limits_w I_x I_y\\ \sum\limits_w I_x I_y & \sum\limits_w I_y^2 \end{array} \right]\)
+
+where w is the window about the pixel, and \(I_x\) and \(I_y\) are the
+gradient images in the x and y direction, respectively. Calculate the
+gradient images using the fivepoint central difference operator. Set
+resulting values that are below a specified threshold value to zero
+(hint: calculating the mean instead of the sum in N allows for adjusting
+the size of the window without changing the threshold value). Apply an
+operation that suppresses (sets to 0) local (i.e., about a window)
+nonmaximum pixel values in the minor eigenvalue image. Vary these
+parameters such that around 600--650 features are detected in each
+image. For resulting nonzero pixel values, determine the subpixel
+feature coordinate using the Forstner corner point operator.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{patches} \PY{k}{as} \PY{n+nn}{patches}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{signal}
+        
+        \PY{c+c1}{\PYZsh{} open the input images}
+        \PY{n}{I1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price\PYZus{}center20.JPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{255.}
+        \PY{n}{I2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price\PYZus{}center21.JPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{255.}
+        
+        \PY{c+c1}{\PYZsh{} Display the input images}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{I1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{I2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{corner}\PY{p}{(}\PY{n}{I}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{w\PYZus{}nms}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} inputs: }
+            \PY{c+c1}{\PYZsh{} I is the input image (may be mxn for BW or mxnx3 for RGB)}
+            \PY{c+c1}{\PYZsh{} w is the size of the window used to compute the gradient matrix N}
+            \PY{c+c1}{\PYZsh{} t is the minor eigenvalue threshold}
+            \PY{c+c1}{\PYZsh{} w\PYZus{}nms is the size of the window used for nonmaximal supression}
+            \PY{c+c1}{\PYZsh{} outputs:}
+            \PY{c+c1}{\PYZsh{} J0 is the mxn image of minor eigenvalues of N before thresholding}
+            \PY{c+c1}{\PYZsh{} J1 is the mxn image of minor eigenvalues of N after thresholding}
+            \PY{c+c1}{\PYZsh{} J2 is the mxn image of minor eigenvalues of N after nonmaximal supression}
+            \PY{c+c1}{\PYZsh{} pts0 is the 2xk list of coordinates of (pixel accurate) corners}
+            \PY{c+c1}{\PYZsh{}     (ie. coordinates of nonzero values of J2)}
+            \PY{c+c1}{\PYZsh{} pts1 is the 2xk list of coordinates of subpixel accurate corners}
+            \PY{c+c1}{\PYZsh{}     found using the Forstner detector}
+            
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}your code here\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{m}\PY{p}{,} \PY{n}{n} \PY{o}{=} \PY{n}{I}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{n}{J0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{J1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{J2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}xgradient Ix matrix}
+            \PY{c+c1}{\PYZsh{}ygradient Iy matrix}
+            \PY{c+c1}{\PYZsh{}translation and summation to calculate the gradient matrices}
+            \PY{n}{xgradient} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{xgradient}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{xgradient}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{n}{xgradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{xgradient}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{n}{xgradient}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{xgradient}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{n}{xgradient}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{xgradient}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{n}{ygradient} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{ygradient}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{I}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}N1 average IxIx matrix}
+            \PY{c+c1}{\PYZsh{}N2 average IxIy matrix}
+            \PY{c+c1}{\PYZsh{}N3 average IyIy matrix}
+            \PY{c+c1}{\PYZsh{}N01 IxIx matrix N02 IxIy N03 IyIy}
+            \PY{n}{N1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{N2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{N3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{N01} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{N02} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{N03} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}
+            \PY{n}{xx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{yy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{xy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{xx} \PY{o}{=} \PY{n}{xgradient}\PY{o}{*}\PY{n}{xgradient}\PY{o}{/}\PY{n}{w}\PY{o}{/}\PY{n}{w}
+            \PY{n}{yy} \PY{o}{=} \PY{n}{ygradient}\PY{o}{*}\PY{n}{ygradient}\PY{o}{/}\PY{n}{w}\PY{o}{/}\PY{n}{w}
+            \PY{n}{xy} \PY{o}{=} \PY{n}{xgradient}\PY{o}{*}\PY{n}{ygradient}\PY{o}{/}\PY{n}{w}\PY{o}{/}\PY{n}{w}
+            \PY{n}{convkernal}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{w}\PY{p}{,}\PY{n}{w}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                \PY{n}{N01} \PY{o}{+}\PY{o}{=} \PY{n}{xx}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+                \PY{n}{N02} \PY{o}{+}\PY{o}{=} \PY{n}{xy}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+                \PY{n}{N03} \PY{o}{+}\PY{o}{=} \PY{n}{yy}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+            \PY{n}{N1} \PY{o}{=} \PY{n}{signal}\PY{o}{.}\PY{n}{correlate2d}\PY{p}{(}\PY{n}{N01}\PY{p}{,} \PY{n}{convkernal}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{boundary}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{N2} \PY{o}{=} \PY{n}{signal}\PY{o}{.}\PY{n}{correlate2d}\PY{p}{(}\PY{n}{N02}\PY{p}{,} \PY{n}{convkernal}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{boundary}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{N3} \PY{o}{=} \PY{n}{signal}\PY{o}{.}\PY{n}{correlate2d}\PY{p}{(}\PY{n}{N03}\PY{p}{,} \PY{n}{convkernal}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{boundary}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}calculate minor eigenvalues}
+            \PY{c+c1}{\PYZsh{}same as the equation that use trace and determint}
+            \PY{n}{J0}\PY{o}{=} \PY{p}{(}\PY{n}{N1} \PY{o}{+} \PY{n}{N3} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{N1} \PY{o}{+} \PY{n}{N3}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{4} \PY{o}{*} \PY{p}{(}\PY{n}{N1} \PY{o}{*} \PY{n}{N3} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{N2}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+            \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{J1}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{o}{=} \PY{n}{J0}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{k}{if} \PY{n}{J0}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{t} \PY{k}{else} \PY{l+m+mi}{0}
+            \PY{n}{lenw} \PY{o}{=} \PY{p}{(}\PY{n}{w\PYZus{}nms} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+            \PY{n}{flag} \PY{o}{=} \PY{k+kc}{False}
+            \PY{c+c1}{\PYZsh{}nonmaximum suppression}
+            \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{cmax} \PY{o}{=} \PY{n}{J1}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}
+                    \PY{k}{for} \PY{n}{x1} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{lenw}\PY{p}{,} \PY{n}{x} \PY{o}{+} \PY{n}{lenw}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{for} \PY{n}{y1} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{lenw}\PY{p}{,} \PY{n}{y} \PY{o}{+} \PY{n}{lenw}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                            \PY{k}{if} \PY{n}{x1} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{x1} \PY{o}{\PYZlt{}} \PY{n}{m} \PY{o+ow}{and} \PY{n}{y1} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{y1} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{:}
+                                \PY{n}{cmax} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{cmax}\PY{p}{,} \PY{n}{J1}\PY{p}{[}\PY{n}{x1}\PY{p}{]}\PY{p}{[}\PY{n}{y1}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{J2}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{o}{=} \PY{n}{J1}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{k}{if} \PY{n}{J1}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{o}{==} \PY{n}{cmax} \PY{k}{else} \PY{l+m+mi}{0}
+                    \PY{k}{if} \PY{o+ow}{not} \PY{n}{J2}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{k}{if} \PY{o+ow}{not} \PY{n}{flag}\PY{p}{:}
+                            \PY{n}{pts0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                            \PY{n}{flag} \PY{o}{=} \PY{k+kc}{True}
+                        \PY{k}{else}\PY{p}{:}
+                            \PY{n}{pts0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{pts0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{ptsize}\PY{o}{=}\PY{n}{pts0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{pts1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{pts0}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n}{lenw} \PY{o}{=} \PY{p}{(}\PY{n}{w} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ptsize}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x}\PY{o}{=}\PY{n}{pts0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                \PY{n}{y}\PY{o}{=}\PY{n}{pts0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                \PY{n}{FCb1}\PY{o}{=}\PY{l+m+mi}{0}
+                \PY{n}{FCb2}\PY{o}{=}\PY{l+m+mi}{0}
+                \PY{k}{for} \PY{n}{x1} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{lenw}\PY{p}{,} \PY{n}{x} \PY{o}{+} \PY{n}{lenw} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{y1} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{lenw}\PY{p}{,} \PY{n}{y} \PY{o}{+} \PY{n}{lenw} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{x1} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{x1} \PY{o}{\PYZlt{}} \PY{n}{m} \PY{o+ow}{and} \PY{n}{y1} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{y1} \PY{o}{\PYZlt{}} \PY{n}{n}\PY{p}{:}
+                            \PY{n}{FCb1}\PY{o}{+}\PY{o}{=}\PY{n}{x1}\PY{o}{*}\PY{n}{N01}\PY{p}{[}\PY{n}{x1}\PY{p}{]}\PY{p}{[}\PY{n}{y1}\PY{p}{]}\PY{o}{+}\PY{n}{y1}\PY{o}{*}\PY{n}{N02}\PY{p}{[}\PY{n}{x1}\PY{p}{]}\PY{p}{[}\PY{n}{y1}\PY{p}{]}
+                            \PY{n}{FCb2}\PY{o}{+}\PY{o}{=}\PY{n}{x1}\PY{o}{*}\PY{n}{N02}\PY{p}{[}\PY{n}{x1}\PY{p}{]}\PY{p}{[}\PY{n}{y1}\PY{p}{]}\PY{o}{+}\PY{n}{y1}\PY{o}{*}\PY{n}{N03}\PY{p}{[}\PY{n}{x1}\PY{p}{]}\PY{p}{[}\PY{n}{y1}\PY{p}{]}
+                \PY{n}{det}\PY{o}{=}\PY{n}{N1}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{*}\PY{n}{N3}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{N2}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{*}\PY{n}{N2}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}
+                \PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{det}\PY{o}{*}\PY{p}{(}\PY{n}{N3}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{*}\PY{n}{FCb1}\PY{o}{\PYZhy{}}\PY{n}{N2}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{*}\PY{n}{FCb2}\PY{p}{)}\PY{p}{)}
+                \PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{det}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{N2}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{*}\PY{n}{FCb1}\PY{o}{+}\PY{n}{N1}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{o}{*}\PY{n}{FCb2}\PY{p}{)}\PY{p}{)}
+            \PY{n}{pts0}\PY{o}{=}\PY{n}{pts0}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+            \PY{n}{pts1}\PY{o}{=}\PY{n}{pts1}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}drop the pts near the boundary}
+            \PY{n}{ilist}\PY{o}{=}\PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{pts1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{if} \PY{n}{m}\PY{o}{\PYZhy{}}\PY{n}{lenw} \PY{o}{\PYZgt{}} \PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=}\PY{n}{lenw} \PY{o+ow}{and} \PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{lenw} \PY{o}{\PYZgt{}} \PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=}\PY{n}{lenw}\PY{p}{]}
+            \PY{n}{pts1}\PY{o}{=}\PY{n}{pts1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ilist}\PY{p}{]}
+            \PY{n}{pts0}\PY{o}{=}\PY{n}{pts0}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{ilist}\PY{p}{]}
+            \PY{k}{return} \PY{n}{J0}\PY{p}{,} \PY{n}{J1}\PY{p}{,} \PY{n}{J2}\PY{p}{,} \PY{n}{pts0}\PY{p}{,} \PY{n}{pts1}
+        
+        
+        \PY{c+c1}{\PYZsh{} parameters to tune}
+        \PY{n}{w}\PY{o}{=}\PY{l+m+mi}{13}
+        \PY{n}{t}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}
+        \PY{n}{w\PYZus{}nms}\PY{o}{=}\PY{l+m+mi}{7}
+        
+        \PY{c+c1}{\PYZsh{} extract corners}
+        \PY{n}{J1\PYZus{}0}\PY{p}{,} \PY{n}{J1\PYZus{}1}\PY{p}{,} \PY{n}{J1\PYZus{}2}\PY{p}{,} \PY{n}{pts1\PYZus{}0}\PY{p}{,} \PY{n}{pts1\PYZus{}1} \PY{o}{=} \PY{n}{corner}\PY{p}{(}\PY{n}{I1}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{w\PYZus{}nms}\PY{p}{)}
+        \PY{n}{J2\PYZus{}0}\PY{p}{,} \PY{n}{J2\PYZus{}1}\PY{p}{,} \PY{n}{J2\PYZus{}2}\PY{p}{,} \PY{n}{pts2\PYZus{}0}\PY{p}{,} \PY{n}{pts2\PYZus{}1} \PY{o}{=} \PY{n}{corner}\PY{p}{(}\PY{n}{I2}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{w\PYZus{}nms}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Display results}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{24}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} show pre\PYZhy{}thresholded corner heat map}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{J1\PYZus{}0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{J2\PYZus{}0}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} show thresholded corner heat map}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{J1\PYZus{}1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{J2\PYZus{}1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} show corner heat map after nonmaximal supression}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{J1\PYZus{}2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{J2\PYZus{}2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} show corners on origional images}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{I1}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} draw rectangles of size w around corners}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{pts1\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{pts1\PYZus{}0}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{add\PYZus{}patch}\PY{p}{(}\PY{n}{patches}\PY{o}{.}\PY{n}{Rectangle}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{w}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{w}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{w}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{pts1\PYZus{}0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{pts1\PYZus{}0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} display pixel accurate corners}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{pts1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{pts1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} display subpixel corners}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{found }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{ corners}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{pts1\PYZus{}0}.shape[1])
+        \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{I2}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{pts2\PYZus{}0}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x}\PY{p}{,}\PY{n}{y} \PY{o}{=} \PY{n}{pts2\PYZus{}0}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{add\PYZus{}patch}\PY{p}{(}\PY{n}{patches}\PY{o}{.}\PY{n}{Rectangle}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{w}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{w}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{w}\PY{p}{,}\PY{n}{w}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{pts2\PYZus{}0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{pts2\PYZus{}0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{pts2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{pts2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{found }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{ corners}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{pts2\PYZus{}0}.shape[1])
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/ipykernel\_launcher.py:63: RuntimeWarning: invalid value encountered in sqrt
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{problem-4-programing-feature-matching-15-points}{%
+\subsection{Problem 4 (Programing): Feature matching (15
+points)}\label{problem-4-programing-feature-matching-15-points}}
+
+Determine the set of one-to-one putative feature correspondences by
+performing a brute-force search for the greatest correlation coefficient
+value (in the range {[}-1, 1{]}) between the detected features in image
+1 and the detected features in image 2. Only allow matches that are
+above a specified correlation coefficient threshold value (note that
+calculating the correlation coefficient allows for adjusting the size of
+the matching window without changing the threshold value). Further, only
+allow matches that are above a specified distance ratio threshold value,
+where distance is measured to the next best match for a given feature.
+Vary these parameters such that around 200 putative feature
+correspondences are established. Optional: constrain the search to
+coordinates in image 2 that are within a proximity of the detected
+feature coordinates in image 1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{match}\PY{p}{(}\PY{n}{I1}\PY{p}{,} \PY{n}{I2}\PY{p}{,} \PY{n}{pts1}\PY{p}{,} \PY{n}{pts2}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} inputs:}
+            \PY{c+c1}{\PYZsh{} I1, I2 are the input images}
+            \PY{c+c1}{\PYZsh{} pts1, pts2 are the point to be matched}
+            \PY{c+c1}{\PYZsh{} w is the size of the window to compute correlation coefficients}
+            \PY{c+c1}{\PYZsh{} t is the correlation coefficient threshold}
+            \PY{c+c1}{\PYZsh{} d distance ration threshold}
+            \PY{c+c1}{\PYZsh{} p is the proximity threshold}
+            \PY{c+c1}{\PYZsh{} outputs:}
+            \PY{c+c1}{\PYZsh{} inds is a 2xk matrix of matches where inds[0,i] indexs a point pts1 }
+            \PY{c+c1}{\PYZsh{}     and inds[1,i] indexs a point in pts2, where k is the number of matches}
+            \PY{c+c1}{\PYZsh{} scores is a vector of length k that contains the correlation}
+            \PY{c+c1}{\PYZsh{}     coefficients of the matches}
+            
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}your code here\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{mask}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{pts1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{pts2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{lenw}\PY{o}{=}\PY{p}{(}\PY{n}{w}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}
+            
+            \PY{c+c1}{\PYZsh{}calculate correlation coefficients}
+            \PY{n}{corr0}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{pts1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{pts2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{corr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{pts1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{pts2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{pts1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{pts2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{}calculate for 3 channels then take the minimum}
+                    \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{x1}\PY{o}{=}\PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                        \PY{n}{y1}\PY{o}{=}\PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                        \PY{n}{window1}\PY{o}{=}\PY{n}{I1}\PY{p}{[}\PY{n}{x1}\PY{o}{\PYZhy{}}\PY{n}{lenw}\PY{p}{:}\PY{n}{x1}\PY{o}{+}\PY{n}{lenw}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{y1}\PY{o}{\PYZhy{}}\PY{n}{lenw}\PY{p}{:}\PY{n}{y1}\PY{o}{+}\PY{n}{lenw}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+                        \PY{n}{list1}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{window1}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{w}\PY{o}{*}\PY{n}{w}\PY{p}{)}\PY{p}{)}
+                        \PY{n}{x2}\PY{o}{=}\PY{n}{pts2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                        \PY{n}{y2}\PY{o}{=}\PY{n}{pts2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                        \PY{n}{window2}\PY{o}{=}\PY{n}{I2}\PY{p}{[}\PY{n}{x2}\PY{o}{\PYZhy{}}\PY{n}{lenw}\PY{p}{:}\PY{n}{x2}\PY{o}{+}\PY{n}{lenw}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{y2}\PY{o}{\PYZhy{}}\PY{n}{lenw}\PY{p}{:}\PY{n}{y2}\PY{o}{+}\PY{n}{lenw}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{k}\PY{p}{]}
+                        \PY{n}{list2}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{window2}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{w}\PY{o}{*}\PY{n}{w}\PY{p}{)}\PY{p}{)}
+                        \PY{c+c1}{\PYZsh{}avoid nan}
+                        \PY{n}{corr0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{list1}\PY{p}{,}\PY{n}{list2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{list1}\PY{p}{,}\PY{n}{list2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{1} \PY{k}{else} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                    \PY{n}{corr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{o}{=}\PY{n+nb}{min}\PY{p}{(}\PY{n}{corr0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{corr0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{corr0}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+                    
+            \PY{c+c1}{\PYZsh{}select match}
+            \PY{n}{flag}\PY{o}{=}\PY{k+kc}{False}
+            \PY{n}{inds}\PY{p}{,}\PY{n}{scores}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}
+            \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                \PY{n}{curcorr}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{mask}\PY{p}{,}\PY{n}{corr}\PY{p}{)}
+                \PY{n}{position}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{curcorr}\PY{p}{)}
+                \PY{n}{m}\PY{p}{,} \PY{n}{n} \PY{o}{=} \PY{n+nb}{divmod}\PY{p}{(}\PY{n}{position}\PY{p}{,} \PY{n}{corr}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}if the current max coef is smaller than threshhold, break the loop}
+                \PY{k}{if} \PY{n}{corr}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{t}\PY{p}{:}
+                    \PY{k}{break}   
+                \PY{n}{cmax}\PY{o}{=}\PY{n}{corr}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+                \PY{n}{corr}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+                
+                \PY{c+c1}{\PYZsh{}find next best}
+                \PY{n}{nextbest}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{corr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{n}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{amax}\PY{p}{(}\PY{n}{corr}\PY{p}{[}\PY{n}{m}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}distance ratio and proximity restrains}
+                \PY{k}{if} \PY{n}{cmax}\PY{o}{\PYZgt{}}\PY{n}{nextbest} \PY{o+ow}{and} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{cmax}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{nextbest}\PY{p}{)}\PY{o}{*}\PY{n}{d} \PYZbs{}
+                \PY{o+ow}{and} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{pts2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{pts1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{pts2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{n}{p}\PY{p}{:}
+                    \PY{k}{if} \PY{o+ow}{not} \PY{n}{flag}\PY{p}{:}
+                        \PY{n}{inds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                        \PY{n}{scores}\PY{o}{=}\PY{n}{cmax}
+                        \PY{n}{flag} \PY{o}{=} \PY{k+kc}{True}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{n}{inds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{inds}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                        \PY{n}{scores}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{scores}\PY{p}{,}\PY{n}{cmax}\PY{p}{)}\PY{p}{)}
+                \PY{n}{mask}\PY{p}{[}\PY{n}{m}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{corr}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{mask}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{n}\PY{p}{]}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{corr}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{inds}\PY{p}{,} \PY{n}{scores}
+        
+        \PY{c+c1}{\PYZsh{} parameters to tune}
+        \PY{n}{w1} \PY{o}{=} \PY{l+m+mi}{13}
+        \PY{n}{t1} \PY{o}{=} \PY{l+m+mf}{0.65}
+        \PY{n}{d1} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{p1} \PY{o}{=} \PY{l+m+mi}{130}
+        
+        \PY{c+c1}{\PYZsh{} do the matching}
+        \PY{n}{inds}\PY{p}{,} \PY{n}{scores} \PY{o}{=} \PY{n}{match}\PY{p}{(}\PY{n}{I1}\PY{p}{,} \PY{n}{I2}\PY{p}{,} \PY{n}{pts1\PYZus{}1}\PY{p}{,} \PY{n}{pts2\PYZus{}1}\PY{p}{,} \PY{n}{w1}\PY{p}{,} \PY{n}{t1}\PY{p}{,} \PY{n}{d1}\PY{p}{,} \PY{n}{p1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} display the results}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ax2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{I1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{found }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{ putative matches}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{inds}.shape[1])
+        \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{I2}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{inds}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ii} \PY{o}{=} \PY{n}{inds}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+            \PY{n}{jj} \PY{o}{=} \PY{n}{inds}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+            \PY{n}{x1} \PY{o}{=} \PY{n}{pts1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{ii}\PY{p}{]}
+            \PY{n}{x2} \PY{o}{=} \PY{n}{pts2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{jj}\PY{p}{]}
+            \PY{n}{y1} \PY{o}{=} \PY{n}{pts1\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{ii}\PY{p}{]}
+            \PY{n}{y2} \PY{o}{=} \PY{n}{pts2\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{jj}\PY{p}{]}
+            \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax1}\PY{o}{.}\PY{n}{add\PYZus{}patch}\PY{p}{(}\PY{n}{patches}\PY{o}{.}\PY{n}{Rectangle}\PY{p}{(}\PY{p}{(}\PY{n}{x1}\PY{o}{\PYZhy{}}\PY{n}{w1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{y1}\PY{o}{\PYZhy{}}\PY{n}{w1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{w1}\PY{p}{,}\PY{n}{w1}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+            \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{x2}\PY{p}{,} \PY{n}{x1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{y2}\PY{p}{,} \PY{n}{y1}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax2}\PY{o}{.}\PY{n}{add\PYZus{}patch}\PY{p}{(}\PY{n}{patches}\PY{o}{.}\PY{n}{Rectangle}\PY{p}{(}\PY{p}{(}\PY{n}{x2}\PY{o}{\PYZhy{}}\PY{n}{w1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{y2}\PY{o}{\PYZhy{}}\PY{n}{w1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{w1}\PY{p}{,}\PY{n}{w1}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
